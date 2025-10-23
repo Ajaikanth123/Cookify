@@ -1308,28 +1308,48 @@ case 10:
     }
 }
 public class Cookify {
+  
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String text = "Welcome to COOKIFY";
-        int n = text.length();
-        for (int i = 0; i < n + 6; i++) System.out.print("*");
-        System.out.println();
-        System.out.println("*  " + text + "  *");
-        for (int i = 0; i < n + 6; i++) System.out.print("*");
-        System.out.println("\n ");
-        System.out.println("Choose time of the day:");
-        System.out.println("1. Morning ");
-        System.out.println("2. Afternoon ");
-        System.out.println("3. Evening ");
-        System.out.println("4. Night ");
-        int timeChoice = MorningRecipes.getInt(sc, "Enter choice: ");
-        switch (timeChoice) {
-            case 1: MorningRecipes.showMenu(sc); break;
-            case 2: AfternoonRecipes.showMenu(sc); break;
-            case 3: EveningRecipes.showMenu(sc); break;
-            case 4: NightRecipes.showMenu(sc); break;
-            default: System.out.println("Invalid choice.");
-            System.out.println("Thank You!...");
+        boolean continueProgram = true;
+
+        while (continueProgram) {
+            System.out.println("Welcome to the Recipe Recommender!");
+            System.out.println("Choose a time of the day:");
+            System.out.println("1. Morning \n2. Afternoon\n3. Evening\n4. Night\n5. Exit");
+            int timeChoice = MorningRecipes.getInt(sc, "Enter your choice: ");
+
+            switch (timeChoice) {
+                case 1:
+                    MorningRecipes.showMenu(sc);
+                    break;
+                case 2:
+                    AfternoonRecipes.showMenu(sc);
+                    break;
+                case 3:
+                    EveningRecipes.showMenu(sc);
+                    break;
+                case 4:
+                    NightRecipes.showMenu(sc);
+                    break;
+                case 5:
+                    System.out.println("Thank you for using Recipe Recommender! Goodbye!");
+                    continueProgram = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please select 1, 2, 3, or 4.");
+                    break;
+            }
+
+            if (continueProgram) {
+                System.out.print("Would you like to view another recipe? (y/n): ");
+                String again = sc.next();
+                if (!again.equalsIgnoreCase("y")) {
+                    continueProgram = false;
+                    System.out.println("Thank you for using Recipe Recommender! Goodbye!");
+                }
+            }
         }
+        sc.close();
     }
 }
